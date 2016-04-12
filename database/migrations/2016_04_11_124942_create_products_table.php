@@ -19,7 +19,6 @@ class CreateProductsTable extends Migration
             $table->string('unit',20);
             $table->integer('price');
             $table->dateTime('updated');
-            $table->timestamps();
             $table->primary('pid');
         });
     }
