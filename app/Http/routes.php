@@ -21,3 +21,4 @@ $app->get('/', function () use ($app) {
 
 $app->get('products','ProductController@index');
 $app->post('products','ProductController@replaceProducts');
+$app->get('products/last','ProductController@getLastTimeProduct');
