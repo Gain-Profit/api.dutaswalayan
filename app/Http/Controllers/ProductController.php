@@ -33,13 +33,20 @@ class ProductController extends Controller
         return response()->json($request->all());
     }
 
-    public static function getLastTimeProduct()
+    public function getLastTimeProduct()
     {
         $last = app('db')->select('SELECT updated FROM products ORDER BY updated DESC LIMIT 1');
         if ($last == []) {
             $last = [["updated" => "2001-01-01 00:00:00"]];
         }
         return $last;
+    }
+
+    public function getProductByPid($pid)
+    {
+        $result = app('db')->select('SELECT * FROM products WHERE pid = "'. $pid . '"');
+
+        return $result;
     }
 
 }
