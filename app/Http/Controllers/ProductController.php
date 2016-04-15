@@ -49,4 +49,12 @@ class ProductController extends Controller
         return $result;
     }
 
+    public function getProductByBarcode($barcode)
+    {
+        $result = app('db')->select('SELECT * FROM products WHERE barcode = "'. $barcode . '"');
+
+        return $result;
+    }
+
+
 }
