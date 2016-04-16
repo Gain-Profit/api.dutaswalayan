@@ -20,7 +20,7 @@ $app->get('/', function () use ($app) {
 //});
 
 $app->get('products','ProductController@index');
-$app->post('products','ProductController@replaceProducts');
+//$app->post('products','ProductController@replaceProducts');
 $app->get('products/pid/{pid}','ProductController@getProductByPid');
 $app->get('products/barcode/{barcode}','ProductController@getProductByBarcode');
 $app->get('productsLastUpdate','ProductController@getLastTimeProduct');
