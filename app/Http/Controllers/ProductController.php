@@ -13,6 +13,23 @@ class ProductController extends Controller
         return app('db')->select('SELECT * FROM products');
     }
 
+    public function getProductCompressed()
+    {
+        $dataDb = app('db')->select('SELECT * FROM products');
+        $json = json_encode($dataDb);
+        $gzdata = gzencode($json, 9);
+        
+        $fileName = "products.json.gz";
+        $file = storage_path("download/" . $fileName);
+        $fp = fopen($file, "w");
+        fwrite($fp, $gzdata);
+        fclose($fp);
+
+        $headers = array();
+
+        return response()->download($file, $fileName, $headers);
+    }
+
     public function replaceProducts(Request $request)
     {
         $attr = ['pid' => $request->input('pid')];
