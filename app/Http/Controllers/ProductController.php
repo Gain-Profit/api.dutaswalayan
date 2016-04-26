@@ -8,11 +8,21 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+    /**
+     * get all product on json format
+     *
+     * @return mixed
+     */
     public function index()
     {
         return app('db')->select('SELECT * FROM products');
     }
 
+    /**
+     * Download compressed product on Gzip.
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
     public function getProductCompressed()
     {
         $dataDb = app('db')->select('SELECT * FROM products');
@@ -30,6 +40,12 @@ class ProductController extends Controller
         return response()->download($file, $fileName, $headers);
     }
 
+    /**
+     * Replace product with request.
+     *
+     * @param Request $request product data to be replaced.
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function replaceProducts(Request $request)
     {
         $attr = ['pid' => $request->input('pid')];
@@ -38,6 +54,11 @@ class ProductController extends Controller
         return response()->json($request->all());
     }
 
+    /**
+     * get last time updated product.
+     *
+     * @return mixed last time product updated
+     */
     public function getLastTimeProduct()
     {
         $last = app('db')->select('SELECT updated FROM products ORDER BY updated DESC LIMIT 1');
@@ -47,6 +68,12 @@ class ProductController extends Controller
         return $last;
     }
 
+    /**
+     * get json product by products id.
+     *
+     * @param $pid product id
+     * @return mixed
+     */
     public function getProductByPid($pid)
     {
         $result = app('db')->select('SELECT * FROM products WHERE pid = "'. $pid . '"');
@@ -54,6 +81,12 @@ class ProductController extends Controller
         return $result;
     }
 
+    /**
+     * get json product by barcode.
+     *
+     * @param $barcode product
+     * @return mixed
+     */
     public function getProductByBarcode($barcode)
     {
         $result = app('db')->select('SELECT * FROM products WHERE barcode = "'. $barcode . '"');
