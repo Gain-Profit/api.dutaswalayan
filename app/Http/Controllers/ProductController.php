@@ -17,12 +17,12 @@ class ProductController extends Controller
     {
         $dataDb = app('db')->select('SELECT * FROM products');
         $json = json_encode($dataDb);
-        $gzdata = gzencode($json, 9);
+        $gzData = gzencode($json, 9);
         
         $fileName = "products.json.gz";
         $file = storage_path("download/" . $fileName);
         $fp = fopen($file, "w");
-        fwrite($fp, $gzdata);
+        fwrite($fp, $gzData);
         fclose($fp);
 
         $headers = array();
