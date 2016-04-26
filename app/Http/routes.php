@@ -15,13 +15,8 @@ $app->get('/', function () use ($app) {
     return 'RERTful api for DUTA SWALAYAN';
 });
 
-//$app->get('/products', function () {
-//    return app('db')->select("SELECT * FROM products");
-//});
-
 $app->get('products','ProductController@index');
 $app->get('products/jsonGzip','ProductController@getProductCompressed');
-//$app->post('products','ProductController@replaceProducts');
 $app->get('products/pid/{pid}','ProductController@getProductByPid');
 $app->get('products/barcode/{barcode}','ProductController@getProductByBarcode');
 $app->get('productsLastUpdate','ProductController@getLastTimeProduct');
