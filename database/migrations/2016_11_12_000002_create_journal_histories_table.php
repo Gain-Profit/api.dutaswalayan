@@ -17,8 +17,8 @@ class CreateJournalHistoriesTable extends Migration
             $table->increments('id');
             $table->integer('company_id')->unsigned();
             $table->integer('account_id')->unsigned();
-            $table->string('month', 2);
-            $table->string('year', 4);
+            $table->integer('month')->unsigned();
+            $table->integer('year')->unsigned();
             $table->bigInteger('beginning_balance')->default(0);
             $table->bigInteger('debit')->default(0);
             $table->bigInteger('credit')->default(0);
